@@ -19,18 +19,6 @@ db.open(function(err, db){
     });
     db.close();
 });
-// var db = MongoClient.connect('mongodb://localhost:27017/blog');
-// var db = new MongoClient.connect(url, function (err, db) {
-//     if (err) throw err;
-//
-//     db.collection('products').find({}).toArray(function (err, result) {
-//         if (err) throw err;
-//
-//         console.log(result);
-//     });
-//     return db;
-// });
-// console.log(db);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
