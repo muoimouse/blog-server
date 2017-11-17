@@ -7,29 +7,31 @@ var router = express.Router();
 // var db = monk('localhost:27017/blog');
 
 var MongoClient = require('mongodb').MongoClient;
+var Db = require('mongodb').Db,
+    Server = require('mongodb').Server;
+const url = 'mongodb://localhost:27017/blog';
+var db = new Db('blog', new Server('localhost', 27017));
+db.open(function(err, db){
+    db.collection('products').find({}).toArray(function (err, result) {
+        if (err) throw err;
 
-var db = MongoClient.connect('mongodb://localhost:27017/blog');
-// var db = new MongoClient.connect('mongodb://localhost:27017/blog', function (err, db) {
-//     if (err) throw err;
-
-    // db.collection('products').find({}).toArray(function (err, result) {
-    //     if (err) throw err;
-    //
-    //     console.log(result);
-    // })
-    // return db;
-// });
-// var app = express();
-// app.use(function (req, res, next) {
-//     req.db = db;
-//     next();
-// });
-console.log(db);
-// db.collection('products').find({}).toArray(function (err, result) {
+        console.log(result);
+    });
+    db.close();
+});
+// var db = MongoClient.connect('mongodb://localhost:27017/blog');
+// var db = new MongoClient.connect(url, function (err, db) {
 //     if (err) throw err;
 //
-//     console.log(result);
+//     db.collection('products').find({}).toArray(function (err, result) {
+//         if (err) throw err;
+//
+//         console.log(result);
+//     });
+//     return db;
 // });
+// console.log(db);
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   // res.render('index', { title: 'Express ssssss' });
