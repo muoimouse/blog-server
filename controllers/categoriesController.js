@@ -2,11 +2,11 @@
 var categories = require('../models/categories');
 
 const controller = class Controller {
-    constructor () {
+    constructor() {
         this.categories = new categories()
     }
 
-    all (req, res, next) {
+    all(req, res, next) {
         this.categories.name = req.name
         this.categories.save(function (err) {
             if ( err ) {

@@ -3,7 +3,7 @@ var Schema = mongooes.Schema
 
 var CategoriesSchema = new Schema({
     name: {
-        type: Number,
+        type: String,
         required: true
     }
 })
