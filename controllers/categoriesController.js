@@ -1,19 +1,28 @@
 'use strict'
-var categories = require('../models/categories');
+const categories = require('../models/categories')
+const baseController = require('./baseController')
 
-const controller = class Controller {
-    constructor() {
-        this.categories = new categories()
+class categoriesController extends baseController {
+    index(req, res, next) {
+        this.data = new categories();
+        // console.log(this.data.findAll(function(err, categories) {
+        //     console.log(categories)
+        // }));
+        console.log(this.data)
+        // this.data.find({}, function(err, docs) {
+        //     console.log(docs)
+        // })
+        // console.log(result);
+        // res.json({message: 'ok'})
+
+        // console.log(this.data.find({}));
     }
 
-    all(req, res, next) {
-        this.categories.name = req.name
-        this.categories.save(function (err) {
-            if ( err ) {
-                res.send(err)
-            }
-            res.json({ message: 'Categories created' })
-        })
+    save(req, res, next) {
+        this.data = new categories()
+        this.data = Object.assign(this.data, req)
+        this.saveRecord(res)
     }
 }
-module.exports = controller
+
+module.exports = categoriesController

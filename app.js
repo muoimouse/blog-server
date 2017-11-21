@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 
 var config = require('./config/config.json')
-var db = require('./config/mongoDB')
 var mongoose = require('mongoose');
 
 var index = require('./routes/index')
@@ -14,16 +13,8 @@ var users = require('./routes/users')
 
 var app = express()
 
-// Connect MongoDB
-// db.connect(config.URL_MONGODB, function (err) {
-//   if ( err ) {
-//     console.log('Unable to connect to MongoDB.')
-//     process.exit(1)
-//   }
-//   console.log('connect ok')
-// })
 // Connect mongoDB with mongoose
-mongoose.connect(config.URL_MONGODB)
+mongoose.connect(config.URL_MONGODB, { useMongoClient: true })
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connect mongoDB error'))
 db.once('open', function () {
@@ -43,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', index)
+app.use('/api/v1/', index)
 app.use('/users', users)
 
 // catch 404 and forward to error handler
