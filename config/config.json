@@ -1,3 +1,4 @@
 {
-  "URL_MONGODB": "mongodb://localhost:27017/blog"
+  "URL_MONGODB": "mongodb://localhost:27017/blog",
+  "LOG_PATH": "storage/logs/log"
 }
