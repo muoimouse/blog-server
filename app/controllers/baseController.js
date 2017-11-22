@@ -20,8 +20,8 @@ const baseController = class Controller {
         if ( this.data ) {
             this.data.save(function (err) {
                 if ( err ) {
-                    let now = new Date();
-                    let error = `[ ${now} ] ${JSON.stringify(err)}`;
+                    let now = new Date()
+                    let error = `[ ${now} ] ${JSON.stringify(err)}`
                     fs.writeFile(config.LOG_PATH, error, 'utf8')
                     return res.send(err)
                 }
