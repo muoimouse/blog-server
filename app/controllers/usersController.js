@@ -1,8 +1,8 @@
 'use strict'
-const categories = require('../models/categories')
+const users = require('../models/users')
 const baseController = require('./baseController')
 
-class categoriesController extends baseController {
+class usersController extends baseController {
     index (req, res) {
         this.data = categories
         if ( req.query._id ) {
@@ -24,4 +24,4 @@ class categoriesController extends baseController {
     }
 }
 
-module.exports = categoriesController
+module.exports = usersController

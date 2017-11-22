@@ -1,7 +1,8 @@
-var mongooes = require('mongoose')
-var Schema = mongooes.Schema
+'use strict'
+const mongooes = require('mongoose')
+const Schema = mongooes.Schema
 
-var Aboutchema = new Schema({
+const Aboutchema = new Schema({
     name: {
         type: String,
         required: true

@@ -1,6 +1,6 @@
-var express = require('express')
-var router = express.Router()
-var categoriesController = require('../app/controllers/categoriesController')
+const express = require('express')
+const router = express.Router()
+const categoriesController = require('../app/controllers/categoriesController')
 
 // Middleware to use for all requests
 router.use(function(req, res, next) {
@@ -17,14 +17,13 @@ router.get('', function(req, res) {
 var categories = new categoriesController()
 router.route('/categories')
     .get(function(req, res) {
-        categories.index({ name: 'hihi' }, res)
+        categories.index(req, res)
     })
     .post(function(req, res) {
-        categories.save(req.body, res)
+        categories.save(req, res)
     })
     .delete(function(req, res) {
-        categories.save({name: 'hihi'}, res)
+        categories.delete(req, res)
     })
-
 
 module.exports = router
