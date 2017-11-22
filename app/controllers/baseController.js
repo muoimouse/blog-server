@@ -2,14 +2,26 @@
 const chai = require('chai')
 const assert = chai.assert
 const fs = require('fs')
-const config = require('../../config/config.json')
-
+// const config = require('../../config/config.json')
+const saveLog = require('../../config/saveLog')
 /**
  * @class baseController
  * @type {Controller}
  */
 const baseController = class Controller {
     constructor () {}
+
+    getAll (res) {
+        if ( this.data ) {
+            this.data.find(function (err, docs) {
+                if ( err ) {
+                    saveLog.save(err)
+                    return res.send(err)
+                }
+                return res.json(docs)
+            })
+        }
+    }
 
     /**
      * function saveRecord
@@ -20,14 +32,13 @@ const baseController = class Controller {
         if ( this.data ) {
             this.data.save(function (err) {
                 if ( err ) {
-                    let now = new Date()
-                    let error = `[ ${now} ] ${JSON.stringify(err)}`
-                    fs.writeFile(config.LOG_PATH, error, 'utf8')
+                    saveLog.save(err)
                     return res.send(err)
                 }
                 return res.json({ message: 'Categories created' })
             })
         }
     }
+
 }
 module.exports = baseController
